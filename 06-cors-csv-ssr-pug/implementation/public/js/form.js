@@ -1,5 +1,4 @@
-
-
+'use strict';
 
 const form = document.getElementById('form');
 const feedbackMessage = document.getElementById('feedback-message');

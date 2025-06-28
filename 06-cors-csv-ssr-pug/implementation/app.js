@@ -48,7 +48,7 @@ app.post('/form', async (req, res) => {
 
         await fs.writeFile(
             dataPath,
-            JSON.stringify([...oldData, newData]),
+            JSON.stringify([newData, ...oldData]),
             'utf8'
         );
 
@@ -66,8 +66,6 @@ app.get('/guests', async (req, res) => {
         const dataQuests = await fs.readFile(dataPath, 'utf8')
             .then(JSON.parse)
             .catch(() => []);
-
-        dataQuests.sort((a, b) => new Date(b.time) - new Date(a.time));
 
         res.render('guests', { guests: dataQuests });
     } catch (err) {
