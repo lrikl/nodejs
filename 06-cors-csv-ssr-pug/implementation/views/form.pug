@@ -1,0 +1,24 @@
+doctype html 
+html(lang='en')
+    head
+        meta(charset='UTF-8')
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title Form page
+    body
+        h3: a(href="/") Main page
+
+        h1 Form
+        
+        form#form(action='/form' method='POST')
+            div
+                input#username(type='text' name='username' placeholder='Your Name' required)
+            div
+                textarea#message(name='message' placeholder='Your message' required) 
+            div
+                button(type='submit') Send
+
+        #feedback-message
+
+        h3: a(href="/guests") All message
+        
+        script(src="/js/form.js")

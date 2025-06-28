@@ -1,0 +1,17 @@
+doctype html
+html(lang="en")
+  head
+    title Guests page
+  body
+    h3: a(href="/") Main page
+    h2 Guests
+
+    if guests.length
+      ul
+        each guest in guests
+          li(style="margin-bottom: 10px;")
+            strong= guest.username
+            div= guest.message
+            small= new Date(guest.time).toLocaleString('uk-UA')
+    else
+      div No messages
