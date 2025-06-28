@@ -1,0 +1,1 @@
+module.exports = (str) => /^[a-zа-яёєіїґ]*$/.test(str);
