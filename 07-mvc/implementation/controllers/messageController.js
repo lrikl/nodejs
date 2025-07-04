@@ -32,9 +32,8 @@ exports.submitForm = async (req, res) => {
 exports.showMessages = async (req, res) => {
     try {
         const dataQuests = await MessageData.showMessages();
-
         res.render('guests', { guests: dataQuests, title: 'Guests' });
-
+        
     } catch (err) {
         debugShowMess('err guests data:', err);
         res.status(500).send('server error');
