@@ -1,7 +1,7 @@
 const MessageData = require('../models/messageModel');
 
 const debugSubmitForm = require('debug')('app: submitForm');
-const debugShowMess = require('debug')('app: ShowMess');
+const debugShowMess = require('debug')('app: showMess');
 
 exports.home = (req, res) => {
     res.render('main');
