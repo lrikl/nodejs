@@ -1,0 +1,15 @@
+extends layout.pug
+block content
+    h1 Form
+    
+    form#form(action='/form' method='POST')
+        div
+            input#username(type='text' name='username' placeholder='Your Name' required)
+        div
+            textarea#message(name='message' placeholder='Your message' required) 
+        div
+            button(type='submit') Send
+
+    #feedback-message
+    
+    script(src="/js/form.js")

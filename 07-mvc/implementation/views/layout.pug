@@ -1,0 +1,15 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset='UTF-8')
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    title= title ? `MVC ${title}` : 'MVC'
+  body(style="padding: 20px;")
+    nav.main-nav
+        ul(style="display: flex; justify-content: space-around; list-style-type: none;")
+            li: a(href="/") Main
+            li: a(href="/form") Form
+            li: a(href="/guests") Guests
+
+    main.content
+        block content
