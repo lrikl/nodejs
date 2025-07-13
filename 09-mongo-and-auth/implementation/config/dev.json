@@ -1,0 +1,12 @@
+{
+  "port": 3500,
+  "session": {
+    "ttl": 3600
+  },
+  "bcrypt": {
+    "saltRounds": 10
+  },
+  "cookie": {
+    "cookieAge": 3600000
+  }
+}

@@ -1,0 +1,18 @@
+nav
+    ul(style="display:flex; justify-content: space-between; list-style-type:none")
+        if (username)
+                li= username
+        li
+            a(href="/") Main
+        li
+            a(href="/common") Common
+        li
+            a(href="/dashboard") Dashboard
+        li
+            if (username)
+                a(href="/logout") Logout
+            else
+                a(href="/login") Login
+        if (!username)
+            li
+                a(href="/register") Signin

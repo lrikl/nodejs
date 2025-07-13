@@ -1,0 +1,53 @@
+include header
+
+.container
+    
+  h1 Hi, #{username}
+  h2 Dashboard
+
+  h4 Tasks List
+
+  table
+    tr
+      th #
+      th title
+      th description
+      th assignee
+
+    each item, index in tasks
+      tr
+        td #{index + 1}
+        td= item.title
+        td= item.description
+        td= item.assignee
+
+  if isAdmin
+    h4 All Users List
+
+    table
+      tr
+        th #
+        th username
+        th email
+        th password
+        th role
+        th createdAt
+
+      each item, index in users
+        if item.username == username
+          tr
+            td.bg-purple-50 #{index + 1}
+            td.bg-purple-50= item.username
+            td.bg-purple-50= item.email
+            td.bg-purple-50= item.password
+            td.bg-purple-50= item.role
+            td.bg-purple-50= new Date(item.createdAt).toLocaleString('uk-UA', { timeZone: 'Europe/Kyiv' })
+        else
+          tr
+            td #{index + 1}
+            td= item.username
+            td= item.email
+            td= item.password
+            td= item.role
+            td= new Date(item.createdAt).toLocaleString('uk-UA', { timeZone: 'Europe/Kyiv' })
+

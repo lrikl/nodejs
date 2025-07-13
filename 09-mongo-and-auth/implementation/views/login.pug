@@ -1,0 +1,17 @@
+include header
+
+.container
+    
+    h1 Login
+    if error
+      p(style="color:red")= error
+    if message
+      p(style="color:green")= message
+
+    form(method="POST" action="/login")
+      div
+        input(type="text" name="email" placeholder="Email" required)
+      div
+        input(type="password" name="password" placeholder="Password" required)
+      div
+        button(type="submit") Login
