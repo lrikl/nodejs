@@ -28,7 +28,7 @@ module.exports = function ({ articlesCollection }) {
       res.render('articles', { articles });
     } catch (err) {
       console.error(err);
-      res.status(500).send("Помилка сервера");
+      res.status(500).send('Помилка сервера');
     }
   });
 
@@ -56,7 +56,7 @@ module.exports = function ({ articlesCollection }) {
       res.redirect('/articles');
     } catch (err) {
       console.error(err);
-      res.status(500).send("Помилка сервера");
+      res.status(500).send('Помилка сервера');
     }
   });
 
@@ -74,7 +74,7 @@ module.exports = function ({ articlesCollection }) {
       res.render('article-form', { article, action: `/articles/${article.url}/edit` });
     } catch (err) {
       console.error(err);
-      res.status(500).send("Помилка сервера");
+      res.status(500).send('Помилка сервера');
     }
   });
 
@@ -101,7 +101,7 @@ module.exports = function ({ articlesCollection }) {
       res.redirect('/articles');
     } catch (err) {
       console.error(err);
-      res.status(500).send("Помилка сервера");
+      res.status(500).send('Помилка сервера');
     }
   });
 
@@ -120,7 +120,7 @@ module.exports = function ({ articlesCollection }) {
       res.redirect('/articles');
     } catch (err) {
       console.error(err);
-      res.status(500).send("Помилка сервера");
+      res.status(500).send('Помилка сервера');
     }
   });
   
@@ -133,7 +133,7 @@ module.exports = function ({ articlesCollection }) {
       res.render('article', { article });
     } catch (err) {
       console.error(err);
-      res.status(500).send("Помилка сервера");
+      res.status(500).send('Помилка сервера');
     }
   });
 

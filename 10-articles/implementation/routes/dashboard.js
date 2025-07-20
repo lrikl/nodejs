@@ -10,7 +10,7 @@ module.exports = function ({ usersCollection }) {
       const users = await usersCollection.find({ role: 'user' }).toArray();
       res.render('dashboard', { users });
     } catch (err) {
-      res.status(500).send('Помилка сервера');
+      res.status(500).send('server error');
     }
   });
 
