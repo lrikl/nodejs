@@ -1,0 +1,23 @@
+include header
+
+.container
+  h1= article._id ? 'Редагувати статтю' : 'Нова стаття'
+
+  form(method="POST", action=action)
+    div
+      input(type="text", name="title", placeholder="Заголовок", value=article.title || '')
+    div
+      input(type="text", name="url", placeholder="URL", value=article.url || '')
+    
+    // Task 06: Додано поле для тегів
+    div
+      input(type="text", name="tags", placeholder="Теги (через кому)", value=article.tags ? article.tags.join(', ') : '')
+
+    div
+      textarea(name="content", placeholder="Вміст статті")= article.content || ''
+    div
+      label
+        input(type="checkbox", name="published", checked=article.published)
+        |  Опубліковано
+    div
+      button(type="submit") Зберегти

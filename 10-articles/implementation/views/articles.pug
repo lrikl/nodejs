@@ -1,0 +1,85 @@
+include header
+
+.container
+    h1 Статті
+    if user
+        div
+            a.button.button-primary(href="/articles/new") Створити
+    hr
+
+    div
+        each article in articles
+            .article-item
+                h3.article-title
+                    a(href=`/articles/${article.url}`)= article.title
+                
+                .article-meta
+                    if article.author
+                        span.author
+                            strong Автор: 
+                            span= article.author
+                    if article.lastUpdatedBy
+                        span.last-updated
+                            strong (Оновлено: 
+                            span= article.lastUpdatedBy
+                            span )
+
+                .article-tags
+                    if article.tags && article.tags.length > 0
+                        strong Теги: 
+                        each tag in article.tags
+                            span.tag= tag
+                    else
+                        span.no-tags Немає тегів
+
+                if user
+                    .article-actions
+                        a.button(href=`/articles/${article.url}/edit`) Редагувати
+                        form(method="POST", action=`/articles/${article.url}/delete`, style="display:inline; margin-left: 10px;")
+                            button.button(type="submit") Видалити
+style.
+  .article-item {
+    margin-bottom: 1.5rem;
+    padding-bottom: 1.5rem;
+  }
+  .article-item:last-child {
+    border-bottom: none;
+  }
+  .article-title {
+    margin-bottom: 0.5rem;
+  }
+  .article-title a {
+    text-decoration: none;
+  }
+  .article-meta {
+    font-size: 1.3rem;
+    color: #777;
+    margin-bottom: 1rem;
+  }
+  .article-meta .author {
+    margin-right: 15px;
+  }
+  .article-tags {
+    margin-bottom: 1rem;
+    font-size: 1.4rem;
+  }
+  .tag {
+    display: inline-block;
+    background-color: #e1e1e1;
+    color: #333;
+    padding: 3px 10px;
+    border-radius: 15px;
+    margin-right: 5px;
+    font-size: 1.2rem;
+    line-height: 1.5;
+  }
+  .no-tags {
+    font-style: italic;
+    color: #999;
+  }
+  .article-actions a, .article-actions button {
+    text-transform: none;
+    height: 32px;
+    line-height: 32px;
+    padding: 0 15px;
+  }
