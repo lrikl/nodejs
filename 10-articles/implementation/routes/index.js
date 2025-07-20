@@ -9,7 +9,8 @@ module.exports = function ({ articlesCollection }) {
     try {
       const articles = await articlesCollection.find({ published: true }).toArray();
       res.render('main', { articles });
-    } catch (err) {
+    } 
+    catch (err) {
       console.error('Error while retrieving list of articles:', err);
       res.status(500).send('server error');
     }
@@ -25,7 +26,8 @@ module.exports = function ({ articlesCollection }) {
       }
 
       res.render('article', { article });
-    } catch (err) {
+    } 
+    catch (err) {
       console.error(`Error retrieving article from url: ${req.params.url}`, err);
       res.status(500).send('server error');
     }

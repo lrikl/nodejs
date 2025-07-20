@@ -31,10 +31,10 @@ module.exports = function ({ usersCollection }) {
         return res.redirect('/dashboard');
       }
 
-      // Якщо логін/пароль невірні, показуємо помилку на сторінці входу
       res.render('login', { error: 'Невірний логін або пароль' });
 
-    } catch (err) {
+    } 
+    catch (err) {
       console.error('Login error:', err);
       res.render('login', { error: 'server error' });
     }
@@ -46,12 +46,12 @@ module.exports = function ({ usersCollection }) {
       const existingUser = await usersCollection.findOne({ email });
 
       if (existingUser) {
-        // Якщо користувач існує, показуємо помилку на сторінці реєстрації
         return res.render('signin', { error: 'Користувач з таким email вже зареєстрований.' });
       }
 
       // Хешуємо пароль перед збереженням у базу даних (10 - 'сіль', складність хешування)
       const hashPassword = await bcrypt.hash(password, 10);
+      
       await usersCollection.insertOne({
         username,
         email,
@@ -63,8 +63,8 @@ module.exports = function ({ usersCollection }) {
       req.session.user = username;
       req.session.email = email;
       res.redirect('/dashboard');
-
-    } catch (err) {
+    } 
+    catch (err) {
       console.error('Error during registration:', err);
       res.render('signin', { error: 'server error' });
     }
@@ -85,7 +85,7 @@ module.exports = function ({ usersCollection }) {
         return res.render('forgot-password', { error: 'Користувача з таким email не знайдено.' });
       }
 
-      // Генеруємо унікальний, криптографічно стійкий токен
+      // Генеруємо унікальний токен
       const token = crypto.randomBytes(32).toString('hex');
       const expires = Date.now() + 1000 * 60 * 30; // 30 хвилин
 
@@ -97,12 +97,12 @@ module.exports = function ({ usersCollection }) {
 
       // Створюємо посилання для скидання пароля
       const resetLink = `http://localhost:${config.port}/reset-password/${token}`;
+
       // У реальному додатку тут була б відправка листа на email
       console.log('Password recovery:', resetLink);
-
       res.render('forgot-password', { message: 'Посилання для відновлення пароля надіслано' });
-
-    } catch (err) {
+    } 
+    catch (err) {
       console.error('Error when requesting password recovery:', err);
       res.render('forgot-password', { error: 'server error' });
     }
@@ -112,6 +112,7 @@ module.exports = function ({ usersCollection }) {
   router.get('/reset-password/:token', async (req, res) => {
     try {
       const { token } = req.params;
+
       // Шукаємо користувача за токеном, який ще не прострочений
       const user = await usersCollection.findOne({
         resetToken: token,
@@ -123,8 +124,8 @@ module.exports = function ({ usersCollection }) {
       }
 
       res.render('reset-password', { token });
-
-    } catch (err) {
+    } 
+    catch (err) {
       console.error('Error while verifying token:', err);
       res.render('login', { error: 'server error' });
     }
@@ -157,8 +158,8 @@ module.exports = function ({ usersCollection }) {
       );
 
       res.redirect('/login');
-
-    } catch (err) {
+    } 
+    catch (err) {
       console.error('Error updating password:', err);
       res.render('reset-password', { token: req.params.token, error: 'server error' });
     }
