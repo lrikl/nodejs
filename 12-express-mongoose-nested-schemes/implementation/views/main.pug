@@ -1,0 +1,43 @@
+include header
+
+.container
+    h1 Main
+    p Список усіх статей:
+    hr
+    
+    .articles-list
+        if articles && articles.length > 0
+            each article in articles
+                .article-item
+                    h3.article-title
+                        a(href=`/articles/${article.url}`)= article.title
+                    
+                    .article-meta
+                        if article.author && article.author.username
+                            span.author
+                                strong Автор: 
+                                span= article.author.username
+                        
+                        span.date
+                            strong Дата: 
+                            span= article.createdAt.toLocaleDateString('uk-UA')
+                        
+                        span.comments-count
+                            strong Коментарі: 
+                            span= article.comments.length
+        else
+            p Ще немає жодної статті.
+
+style.
+  .article-item {
+    border-bottom: 1px solid #eee;
+    padding: 1.5rem 0;
+  }
+  .article-item:last-child {
+    border-bottom: none;
+  }
+  .article-meta span {
+    margin-right: 15px;
+    font-size: 1.3rem;
+    color: #777;
+  }

@@ -1,0 +1,54 @@
+include header
+
+.container
+    h1 Hi, #{username}
+    h2 Dashboard
+    p Ви увійшли в систему.
+    
+    hr
+    
+    h3 Змінити ім'я користувача
+    if error
+      p(style="color: red; margin-bottom: 1rem;")= error
+
+    form(method="POST" action="/dashboard/update-username")
+      .row
+        .six.columns
+          input.u-full-width(type="text" name="newUsername" id="newUsername" placeholder="ім'я" required)
+        .six.columns
+          button.button-primary(type="submit" id="submit-button") Оновити ім'я
+    
+    hr
+
+    h3 Список користувачів
+    table.u-full-width
+      thead
+        tr
+          th #
+          th username
+          th email
+          th role
+          th Дата реєстрації
+      tbody
+        if users && users.length > 0
+          each item, index in users
+            if item.username == username
+              tr.current-user
+                td #{index + 1}
+                td= item.username
+                td= item.email
+                td= item.role
+                td= item.createdAt.toLocaleString('uk-UA')
+            else
+              tr
+                td #{index + 1}
+                td= item.username
+                td= item.email
+                td= item.role
+                td= item.createdAt.toLocaleString('uk-UA')
+
+style.
+  .current-user {
+    background-color: #f3e8ff;
+    font-weight: bold; 
+  }

@@ -1,0 +1,76 @@
+include header
+
+.container
+  if article
+    h1= article.title
+    .article-tags
+      if article.tags && article.tags.length > 0
+          strong Теги: 
+          each tag in article.tags
+              span.tag= tag
+      else
+          span.no-tags Немає тегів
+    p(style="white-space: pre-wrap;")= article.content
+    hr
+
+    h5 Коментарі
+    .comments-list
+      if article.comments && article.comments.length > 0
+        each comment in article.comments
+          if comment.visible
+            .comment-item
+              if comment.author && comment.author.username
+                p.comment-author 
+                  strong= comment.author.username
+              else
+                p.comment-author
+                  strong Анонім
+
+              p.comment-text 
+                strong Коментар: 
+                span #{comment.text}
+              p.comment-date 
+                small #{comment.createdAt.toLocaleString('uk-UA')}
+      else
+        p Ще немає коментарів
+
+    hr
+
+    h5 Залишити коментар
+    if error
+      p(style="color: red; margin-bottom: 1rem;")= error
+    if user
+      form(method="POST", action=`/comment/${article._id}`)
+        textarea.u-full-width(name="commentText" id="commentText" placeholder="Напишіть щось..." required minlength="5")= commentText
+        button.button-primary(type="submit") Коментувати
+    else
+      p
+        a(href="/login") Увійдіть,
+        |  щоб залишити коментар.
+
+style.
+  .comment-item {
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+  }
+  .article-tags {
+    margin-bottom: 1rem;
+    font-size: 1.4rem;
+  }
+  .tag {
+    display: inline-block;
+    background-color: #e1e1e1;
+    color: #333;
+    padding: 3px 10px;
+    border-radius: 15px;
+    margin-right: 5px;
+    font-size: 1.2rem;
+    line-height: 1.5;
+  }
+  .no-tags {
+    font-style: italic;
+    color: #999;
+  }

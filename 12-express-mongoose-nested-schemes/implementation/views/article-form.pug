@@ -1,0 +1,42 @@
+include header
+
+.container
+  h1= article._id ? 'Редагувати статтю' : 'Нова стаття'
+
+  if errors && errors.length > 0
+    .errors-container
+      ul
+        each error in errors
+          li= error
+
+  form(method="POST", action=action)
+    div
+      input(type="text", name="title", placeholder="Заголовок", value=article.title || '')
+    div
+      input(type="text", name="url", placeholder="URL", value=article.url || '')
+    
+    div
+      - const tagsValue = Array.isArray(article.tags) ? article.tags.join(', ') : (article.tags || '')
+      input(type="text", name="tags", placeholder="Теги (через кому)", value=tagsValue)
+
+    div
+      textarea(name="content", placeholder="Вміст статті")= article.content || ''
+    div
+      label
+        input(type="checkbox", name="published", checked=article.published)
+        |  Опубліковано
+    div
+      button(type="submit") Зберегти
+
+style.
+  .errors-container {
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid #e0b4b4;
+    background-color: #fce8e6;
+    border-radius: 4px;
+    color: #a52a2a;
+  }
+  .errors-container h4 {
+    margin-top: 0;
+  }
