@@ -61,7 +61,6 @@ connectDB().then(() => {
   });
 
   app.use((req, res, next) => {
-    const lang = req.params.lang || config.defaultLocale;
     return res.status(404).render('404');
   });
 

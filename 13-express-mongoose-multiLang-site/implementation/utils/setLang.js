@@ -12,7 +12,7 @@ module.exports = (req, res, next) => {
         return res.status(404).render('404');
     }
 
-    res.setLocale(lang); // Устанавливаем локаль для i18n
+    res.setLocale(lang); // для i18n
     console.log('Valid path requested:', res.locals.clearPath);
 
     next();
