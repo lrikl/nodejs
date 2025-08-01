@@ -1,0 +1,6 @@
+{
+    "mongoUrl": "MONGO_URL",
+    "dbName": "DB_NAME",
+    "dbSessionCollectionName": "DB_SESSION_COLLECTION",
+    "session_key": "SESSION_KEY"
+}

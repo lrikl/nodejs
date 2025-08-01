@@ -1,0 +1,18 @@
+include header
+
+.container
+    
+    h1= __('Login')
+    if error
+      p(style="color:red")= error
+
+    p 
+      a(href=`/${lang}/forgot-password`)= __('Forgot password?')
+
+    form(method="POST" action=`/${lang}/login`)
+      div
+        input(type="text" name="email" placeholder=__('Email') required)
+      div
+        input(type="password" name="password" placeholder=__('Password') required)
+      div
+        button(type="submit")= __('Log In')

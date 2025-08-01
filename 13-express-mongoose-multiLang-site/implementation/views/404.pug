@@ -1,0 +1,30 @@
+include header
+
+block content
+  .container.not-found-container
+    h1.not-found-title 404
+    h4= __('Not Found')
+    p= __('The requested URL was not found on this server:')
+    a(href="/", class="button button-primary")= __('Go to Home Page')
+
+  style.
+    .not-found-container {
+      text-align: center;
+      padding-top: 5rem;
+      padding-bottom: 5rem;
+    }
+    .not-found-title {
+      font-size: 8rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: #ccc;
+    }
+    .not-found-url {
+      font-family: monospace;
+      background-color: #f1f1f1;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      display: inline-block;
+      margin-top: 1rem;
+      margin-bottom: 2rem;
+    }

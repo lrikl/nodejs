@@ -1,0 +1,29 @@
+nav(style="display: flex; justify-content: space-between; align-items: center; padding: 10px 0;")
+  
+  ul(style="display:flex; list-style-type:none; gap: 15px; margin: 0; padding: 0;")
+    li
+      a(href=`/${lang}`) #{__('Main')}
+    li
+      a(href=`/${lang}/page`) #{__('Page-Local')}
+    li
+      a(href=`/${lang}/articles`) #{__('Articles')}
+      
+  ul(style="display:flex; list-style-type:none; align-items: center; gap: 15px; margin: 0; padding: 0;")
+    if user
+      li
+        a(href=`/${lang}/dashboard`)= `${__('Dashboard')}`
+      li
+        a(href=`/${lang}/logout`)= __('Logout')
+    else
+      li
+        a(href=`/${lang}/login`)= __('Login')
+      li
+        a(href=`/${lang}/signin`)= __('Sign In')
+        
+    li
+      select(onchange="window.location.href=this.value", style="margin-bottom: 0;")
+        each item in langs
+          option(
+            value=`/${item}${clearPath}`,
+            selected=(item === lang)
+          ) #{item.toUpperCase()}

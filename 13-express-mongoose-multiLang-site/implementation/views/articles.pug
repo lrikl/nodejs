@@ -1,0 +1,84 @@
+include header
+
+.container
+    h1= __('Articles')
+    if user
+        div
+            a.button.button-primary(href=`/${lang}/articles/new`)= __('Create')
+    hr
+
+    div
+        each article in articles
+            .article-item
+                h3.article-title
+                    a(href=`/${lang}/articles/${article.url}`)= article.title
+                
+                .article-meta
+                    if article.author
+                        span.author
+                            strong= __('Author:') + ' '
+                            span= article.author.username
+                    if article.lastUpdatedBy
+                        span.last-updated
+                            strong= __('Last updated by:') + ' '
+                            span= article.lastUpdatedBy.username
+                            span 
+
+                .article-tags
+                    if article.tags && article.tags.length > 0
+                        strong= __('Tags:') + ' '
+                        each tag in article.tags
+                            span.tag= tag
+                    else
+                        span.no-tags= __('No tags')
+
+                if user
+                    .article-actions
+                        a.button(href=`/${lang}/articles/${article.url}/edit`)= __('Edit')
+                        form(method="POST", action=`/${lang}/articles/${article.url}/delete`, style="display:inline; margin-left: 10px;")
+                            button.button(type="submit")= __('Delete')
+                  
+style.
+  .article-item {
+    margin-bottom: 1.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid #E1E1E1;
+  }
+  .article-title {
+    margin-bottom: 0.5rem;
+  }
+  .article-title a {
+    text-decoration: none;
+  }
+  .article-meta {
+    font-size: 1.3rem;
+    color: #777;
+    margin-bottom: 1rem;
+  }
+  .article-meta .author {
+    margin-right: 15px;
+  }
+  .article-tags {
+    margin-bottom: 1rem;
+    font-size: 1.4rem;
+  }
+  .tag {
+    display: inline-block;
+    background-color: #e1e1e1;
+    color: #333;
+    padding: 3px 10px;
+    border-radius: 15px;
+    margin-right: 5px;
+    font-size: 1.2rem;
+    line-height: 1.5;
+  }
+  .no-tags {
+    font-style: italic;
+    color: #999;
+  }
+  .article-actions a, .article-actions button {
+    text-transform: none;
+    height: 32px;
+    line-height: 32px;
+    padding: 0 15px;
+  }

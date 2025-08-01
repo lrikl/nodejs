@@ -1,0 +1,54 @@
+include header
+
+.container
+    h1= __('Hi,') + ' ' + username
+    h2= __('Dashboard')
+    p= __('You are logged in.')
+    
+    hr
+    
+    h3= __('Change username')
+    if error
+      p(style="color: red; margin-bottom: 1rem;")= error
+
+    form(method="POST" action=`/${lang}/dashboard/update-username`)
+      .row
+        .six.columns
+          input.u-full-width(type="text" name="newUsername" id="newUsername" placeholder=__('Username') required)
+        .six.columns
+          button.button-primary(type="submit" id="submit-button")= __('Update username')
+    
+    hr
+
+    h3= __('Users list')
+    table.u-full-width
+      thead
+        tr
+          th #
+          th= __('Username')
+          th= __('Email')
+          th= __('Role')
+          th= __('Registration date')
+      tbody
+        if users && users.length > 0
+          each item, index in users
+            if item.email === usermail
+              tr.current-user
+                td #{index + 1}
+                td= item.username
+                td= item.email
+                td= item.role
+                td= item.createdAt.toLocaleString(lang === 'ua' ? 'uk-UA' : 'fr-FR')
+            else
+              tr
+                td #{index + 1}
+                td= item.username
+                td= item.email
+                td= item.role
+                td= item.createdAt.toLocaleString(lang === 'ua' ? 'uk-UA' : 'fr-FR')
+
+style.
+  .current-user {
+    background-color: #f3e8ff;
+    font-weight: bold; 
+  }

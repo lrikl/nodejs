@@ -1,0 +1,43 @@
+include header
+
+.container
+    h1= __('Main')
+    p= __('List of all articles:')
+    hr
+    
+    .articles-list
+        if articles && articles.length > 0
+            each article in articles
+                .article-item
+                    h3.article-title
+                        a(href=`/${lang}/articles/${article.url}`)= article.title
+                    
+                    .article-meta
+                        if article.author && article.author.username
+                            span.author
+                                strong= __('Author:') + ' '
+                                span= article.author.username
+                        
+                        span.date
+                            strong= __('Date:') + ' '
+                            span= article.createdAt.toLocaleDateString(lang === 'ua' ? 'uk-UA' : 'fr-FR')
+                        
+                        span.comments-count
+                            strong= __('Comments:') + ' '
+                            span= article.comments.length
+        else
+            p= __('No articles yet.')
+
+style.
+  .article-item {
+    border-bottom: 1px solid #eee;
+    padding: 1.5rem 0;
+  }
+  .article-item:last-child {
+    border-bottom: none;
+  }
+  .article-meta span {
+    margin-right: 15px;
+    font-size: 1.3rem;
+    color: #777;
+  }

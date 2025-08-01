@@ -1,0 +1,5 @@
+{
+    "port" : 3050,
+    "defaultLocale": "ua",
+    "locales": ["ua", "fr"]
+}

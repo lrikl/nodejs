@@ -1,0 +1,17 @@
+include header
+
+.container
+    
+    h1= __('Registration')
+    if error
+      p(style="color:red")= error
+
+    form(method="POST" action=`/${lang}/signin`)
+      div
+        input(type="text" name="email" placeholder=__('User email') required)
+      div
+        input(type="text" name="username" placeholder=__('Username') required)
+      div
+        input(type="password" name="password" placeholder=__('Password') required)
+      div
+        button(type="submit")= __('Send')

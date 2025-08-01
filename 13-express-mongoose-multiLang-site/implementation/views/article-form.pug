@@ -1,0 +1,42 @@
+include header
+
+.container
+  h1= article._id ? __('Edit article') : __('New article')
+
+  if errors && errors.length > 0
+    .errors-container
+      ul
+        each error in errors
+          li= error
+
+  form(method="POST", action=action)
+    div
+      input(type="text", name="title", placeholder=__('Title'), value=article.title || '')
+    div
+      input(type="text", name="url", placeholder=__('URL'), value=article.url || '')
+    
+    div
+      - const tagsValue = Array.isArray(article.tags) ? article.tags.join(', ') : (article.tags || '')
+      input(type="text", name="tags", placeholder=__('Tags (comma-separated)'), value=tagsValue)
+
+    div
+      textarea(name="content", placeholder=__('Content'))= article.content || ''
+    div
+      label
+        input(type="checkbox", name="published", checked=article.published)
+        |  #{__('Published')}
+    div
+      button(type="submit")= __('Save')
+
+style.
+  .errors-container {
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid #e0b4b4;
+    background-color: #fce8e6;
+    border-radius: 4px;
+    color: #a52a2a;
+  }
+  .errors-container h4 {
+    margin-top: 0;
+  }

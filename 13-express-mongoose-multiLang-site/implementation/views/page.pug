@@ -1,0 +1,41 @@
+include header
+
+.container 
+  if pages && pages.length > 0
+    each item in pages
+      .page-item
+        h2.page-caption= item.caption[lang]
+        if item.image
+          img.page-image(src=item.image, alt=item.caption[lang])
+        
+        .page-text!= item.text[lang]
+
+      hr
+  else
+    p Контент не знайден
+
+style.
+  .page-item {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+  }
+  .page-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 4px;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    display: block;
+  }
+  .page-caption {
+    font-size: 2.5rem;
+    font-weight: 600;
+  }
+  .page-text {
+    font-size: 1.6rem;
+    line-height: 1.6;
+    white-space: pre-wrap;
+  }
+  .page-text p {
+    margin-bottom: 1em;
+  }
